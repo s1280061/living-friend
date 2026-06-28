@@ -69,7 +69,8 @@ Create a project, then in the SQL editor run, in order:
 Copy `.env.example` → `.env.local` and fill in:
 - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
 - `GROQ_API_KEY` (Groq Cloud — https://console.groq.com/keys), optionally `GROQ_MODEL` (default `llama-3.3-70b-versatile`)
-- `NEWS_API_KEY` (NewsAPI.org — optional; without it the friend just has fewer experiences)
+- News: defaults to `NEWS_PROVIDER=rss` (Yahoo!ニュース RSS — no key needed). Set
+  `NEWS_PROVIDER=newsapi` + `NEWS_API_KEY` to use NewsAPI.org instead.
 - `CRON_SECRET` (any long random string)
 
 ### 4. Run

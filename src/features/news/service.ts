@@ -4,7 +4,7 @@ import { emotionService } from "@/features/emotion/service";
 import { todayInZone } from "@/utils/time";
 import type { EmotionKind, Friend, NewsEvent } from "@/types";
 import { newsRepository } from "./repository";
-import { newsApiProvider, type Headline, type NewsProvider } from "./provider";
+import { getNewsProvider, type Headline, type NewsProvider } from "./provider";
 
 interface TransformedNews {
   experience: string;
@@ -26,7 +26,7 @@ export const newsService = {
    */
   async ingestForToday(
     friendId: string,
-    provider: NewsProvider = newsApiProvider
+    provider: NewsProvider = getNewsProvider()
   ): Promise<NewsEvent[]> {
     const friend = await friendService.getById(friendId);
     if (!friend) throw new Error(`Friend ${friendId} not found`);

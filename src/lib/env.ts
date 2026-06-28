@@ -34,6 +34,10 @@ export const serverEnv = {
   get groqModel() {
     return process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile";
   },
+  get newsProvider() {
+    // "rss" (default, Yahoo!ニュース, no key) | "newsapi"
+    return (process.env.NEWS_PROVIDER ?? "rss").toLowerCase();
+  },
   get newsApiKey() {
     return process.env.NEWS_API_KEY ?? "";
   },
