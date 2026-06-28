@@ -90,14 +90,15 @@ curl -H "Authorization: Bearer YOUR_CRON_SECRET" http://localhost:3000/api/cron/
 
 ## Cron (Vercel)
 
-`vercel.json` schedules (all times **UTC**; the friend lives in JST = UTC+9):
+`vercel.json` schedules (all times **UTC**; the friend lives in JST = UTC+9).
+Kept to **2 once-daily jobs** so it runs on Vercel's free (Hobby) plan:
 
-| Job       | UTC          | JST            | What it does                          |
-|-----------|--------------|----------------|---------------------------------------|
-| `morning` | `0 21 * * *` | ~06:00         | generate today's schedule, reset mood |
-| `news`    | `0 0,9 * * *`| ~09:00 / 18:00 | ingest news → lived experiences       |
-| `night`   | `0 13 * * *` | ~22:00         | write the diary, fold day into memory |
+| Job       | UTC          | JST     | What it does                                         |
+|-----------|--------------|---------|------------------------------------------------------|
+| `morning` | `0 21 * * *` | ~06:00  | generate today's schedule, reset mood, ingest news   |
+| `night`   | `0 13 * * *` | ~22:00  | write the diary, fold the day into memory            |
 
+`/api/cron/news` still exists for manual/extra triggering, but isn't scheduled.
 Vercel automatically sends `Authorization: Bearer $CRON_SECRET`. Set `CRON_SECRET` in the
 Vercel project env. Deploy with the Vercel GitHub integration or `vercel --prod`.
 
