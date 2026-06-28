@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/morning",
+      "schedule": "0 21 * * *"
+    },
+    {
+      "path": "/api/cron/news",
+      "schedule": "0 0,9 * * *"
+    },
+    {
+      "path": "/api/cron/night",
+      "schedule": "0 13 * * *"
+    }
+  ]
+}
