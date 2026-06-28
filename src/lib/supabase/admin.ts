@@ -14,6 +14,13 @@ export function getAdminClient(): SupabaseClient<Database> {
   if (cached) return cached;
   cached = createClient<Database>(serverEnv.supabaseUrl, serverEnv.supabaseServiceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      // Opt out of Next.js's fetch Data Cache: the friend's life changes over
+      // time, so every server-side read must hit Supabase fresh (no stale
+      // schedule/emotion/status). Without this, GET route handlers serve
+      // cached query results.
+      fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }),
+    },
   });
   return cached;
 }

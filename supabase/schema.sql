@@ -169,3 +169,15 @@ create index if not exists idx_emotions_friend_time on emotions (friend_id, crea
 create index if not exists idx_diaries_friend_date on diaries (friend_id, date desc);
 create index if not exists idx_news_friend_date on news_events (friend_id, date desc);
 create index if not exists idx_memories_friend_importance on memories (friend_id, importance desc, happened_at desc);
+
+-- ─────────────────────────────────────────────
+--  Privileges — the app accesses everything server-side with the
+--  service_role key. Grant it explicitly (Supabase's auto-grant doesn't
+--  always apply to tables created via the SQL editor). The public anon key
+--  is intentionally NOT granted access.
+-- ─────────────────────────────────────────────
+grant usage on schema public to service_role;
+grant all privileges on all tables in schema public to service_role;
+grant all privileges on all sequences in schema public to service_role;
+alter default privileges in schema public grant all on tables to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
